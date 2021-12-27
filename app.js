@@ -1,5 +1,6 @@
 const request = require('request')
 const nodemailer = require('nodemailer')
+const easyvk = require('easyvk')
 
 const promocode = '.promo_code=703130261221';
 const dates = '2022-07-12%3B2022-07-22';
@@ -29,6 +30,7 @@ const searchDiscount = () => {
                 const amount = (discount.amount / discount.basic_after_tax) * 100
                 if (amount >= 60) {
                     sendMessage(item)
+                    sendMessageVk(item)
                     clearInterval(timer)
                     console.log(`YES discount ${new Date().toTimeString()}`)
                     return
@@ -39,6 +41,22 @@ const searchDiscount = () => {
         }
         console.log(`no discount ${new Date().toTimeString()}`)
     }
+}
+
+const sendMessageVk = (item) => {
+    easyvk({
+        username: '89218089025',
+        password: '64822mirfena'
+    }).then(async (vk) => {
+        let response = await vk.call('messages.send', {
+            peer_id: 10239576,
+            message: 'Скорее беги бронировать отель!!!! Письмо отправлено ' + new Date(),
+            random_id: easyvk.randomId()
+        })
+
+        console.log("Message sent " + response)
+
+    })
 }
 
 const sendMessage = (item) => {
@@ -65,6 +83,9 @@ const sendMessage = (item) => {
     })
     transporter.close()
 }
+
+
+// init
 timer = setInterval(() => {
     getDataMria()
 }, time * 60000)

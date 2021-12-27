@@ -1,7 +1,13 @@
 {
   "name": "mria",
   "version": "1.0.0",
+  "scripts": {
+    "app": "node app.js"
+  },
   "dependencies": {
-    "nodemailer": "^6.7.2"
+    "child_process": "^1.0.2",
+    "easyvk": "^2.8.2",
+    "nodemailer": "^6.7.2",
+    "request": "^2.88.2"
   }
 }
