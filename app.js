@@ -89,7 +89,7 @@ const sendMessage = (item) => {
 // init
 timer = setInterval(() => {
     getDataMria()
-}, time * 6000)
+}, time * 60000)
 
 keypress(process.stdin);
 process.stdin.on('keypress', function (ch, key) {
