@@ -1,6 +1,7 @@
 const request = require('request')
 const nodemailer = require('nodemailer')
 const easyvk = require('easyvk')
+const keypress = require('keypress');
 
 const promocode = '.promo_code=703130261221';
 const dates = '2022-07-12%3B2022-07-22';
@@ -88,4 +89,13 @@ const sendMessage = (item) => {
 // init
 timer = setInterval(() => {
     getDataMria()
-}, time * 60000)
+}, time * 6000)
+
+keypress(process.stdin);
+process.stdin.on('keypress', function (ch, key) {
+    if (key && key.ctrl && key.name == 'c') {
+        process.exit();
+    }
+});
+process.stdin.setRawMode(true);
+process.stdin.resume();
